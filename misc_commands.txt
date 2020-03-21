@@ -1,0 +1,58 @@
+sudo kubectl describe secret -n kube-system
+
+Error: kubernetes-dashboard-5f5f847d57-m7r74 status is CrashLoopBackOff
+Detailed Error in the logs : dial tcp 10.96.0.1:443: connect: no route to host
+Solution:   sudo systemctl stop firewalld
+
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1066 bytes
+namespace:  11 bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6InUwdzZyT3FxVDJHaDBkSE9iYTJkYS1CWHdLakxKNGw4YjVnWlU3eTdBdlEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhdHRhY2hkZXRhY2gtY29udHJvbGxlci10b2tlbi1oZ3RjOCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhdHRhY2hkZXRhY2gtY29udHJvbGxlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImZiZjk5MWVmLTU5N2UtNGY5ZC05ZGQ1LTBhYzZkN2FkOTdkNiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphdHRhY2hkZXRhY2gtY29udHJvbGxlciJ9.E7fU-uHEyIGQnlsyvKkJrjkdCdkOoM11Xb_Guo8gWLZCxipVBv_5qHwT8B_DT1wlXi1XBngEVxocWLW_LyF2ldITagvntSCIXRFub-fZRe9VnKqN7jvv7NiGkx_9fLoSy0lw33vZ6rmWP18c7Qt1Nfw2UsHECM5OHLHSBbTg9Lva5H-ia0m-86frD8_W3AxM_C7KPSAqloKHvK_jZd1ems6DpxKGFmJXh9nLPJysrRsOVrYnh4PaT6mF6a_Ii5_LSJePWrZosR0I-spv2Oxyk9e1rMTEuXH1ivELr-GeUh-mkakw2I_4Kxv5dwWXPN-piWT_CzYTQ5oVpRGVXnkR3g
+
+
+
+# Creating a nginx pod
+sudo kubectl run mynginx --image=nginx:alpine
+
+#Error : id : unable to do port forwarding: socat not found
+Solution : sudo apt-get -y install socat
+
+sudo kubectl port-forward mynginx-74f4c4b7c4-4fnfn 8080:80
+
+sudo kubectl delete deployment mynginx
+
+sudo kubectl create -f sandeep/mynginx-pod.yaml --dry-run --validate=true
+sudo kubectl create -f sandeep/mynginx-pod.yaml
+sudo kubectl apply -f sandeep/mynginx-pod.yaml
+
+
+sudo kubectl create -f sandeep/mynginx-pod.yaml --save-config
+
+sudo kubectl get pod mynginx -o yaml
+sudo kubectl describe pod mynginx
+
+# login to pod
+sudo kubectl exec mynginx -it sh 
+
+# Edit the existing deployment file 
+sudo kubectl edit -f sandeep/mynginx-pod.yaml
+
+#Deployment
+sudo kubectl apply -f sandeep/deployment.yaml
+
+#Creating services
+
+#listen on port 8080 locally and forward to port 80 in pod
+sudo kubectl port-forward pod/pod-name 8080:80
+
+#listen on port 8080 locally and forward to deployment's pod
+sudo kubectl port-forward deployment/deployment-name 8080
+
+#listen on port 8080 locally and forward to service's pod
+sudo kubectl port-forward service/service-name 8080
+
+
