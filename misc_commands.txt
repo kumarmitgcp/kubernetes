@@ -55,4 +55,11 @@ sudo kubectl port-forward deployment/deployment-name 8080
 #listen on port 8080 locally and forward to service's pod
 sudo kubectl port-forward service/service-name 8080
 
+#Creating or updating a service
+sudo kubectl create -f mynginx-service.yaml
+sudo kubectl apply -f mynginx-service.yaml
+sudo kubectl delete -f mynginx-service.yaml
 
+#Shell into a pod and test a URL.
+#If there are multiple containers running in a pod then add "-c containerId" in below command.
+sudo kubectl exec pod-name -- curl -s http://podIP
