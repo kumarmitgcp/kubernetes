@@ -3,10 +3,11 @@ kind: Service
 metadata:
  name: frontend
 spec:
- type: ClusterIP
+ type: NodePort
  selector:
     app: mynginx
  ports:
   - name: http
     port: 8080
     targetPort: 80
+    nodePort: 31000
