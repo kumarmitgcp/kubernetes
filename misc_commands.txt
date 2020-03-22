@@ -63,3 +63,6 @@ sudo kubectl delete -f mynginx-service.yaml
 #Shell into a pod and test a URL.
 #If there are multiple containers running in a pod then add "-c containerId" in below command.
 sudo kubectl exec pod-name -- curl -s http://podIP
+
+#Volumes
+sudo kubectl describe pod pod-name
