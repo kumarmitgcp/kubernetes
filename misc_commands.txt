@@ -66,3 +66,17 @@ sudo kubectl exec pod-name -- curl -s http://podIP
 
 #Volumes
 sudo kubectl describe pod pod-name
+
+#ConfigMap
+# using a file with key-value pairs
+sudo kubectl create ConfigMap configmap-name --from-file=path-of-the-file
+
+# create a env configMap using a file with key-value pairs
+sudo kubectl create ConfigMap configmap-name --from-env-file=path-of-the-file
+
+# create a configmap from individual data values
+sudo kubectl create ConfigMap configmap-name --from-literal=apiUrl=http://my-api --from-literal=key2=value2
+
+sudo kubectl get cm
+
+sudo kubectl get cm -o yaml
