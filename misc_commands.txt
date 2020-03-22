@@ -80,3 +80,28 @@ sudo kubectl create ConfigMap configmap-name --from-literal=apiUrl=http://my-api
 sudo kubectl get cm
 
 sudo kubectl get cm -o yaml
+
+sudo kubectl delete cm app-settings
+
+#Build image: 
+sudo docker build -t node-configmap .
+#Create ConfigMap:
+sudo kubectl create cm app-settings --from-env-file=settings.config
+
+#Create deployment:
+sudo kubectl apply -f node.deployment.yml
+
+#Port forward the Pod:
+sudo kubectl port-forward [pod-name] 9000
+
+#Visit http://localhost:9000 and view the ConfigMap settings output
+
+#secrets
+
+sudo kubectl create secret generic db-passwords --from-literal=db-password='password' --from-literal=db-root-password='password'
+sudo kubectl create -f mongo.deployment.yml
+sudo kubectl create secret generic my-secret --from-file=ssh-privatekey=~/.ssh/id_rsa --from-file=ssh-publickey=~/.ssh/id_rsa.pub
+sudo kubectl create secret tls tls-secret --cert=path/to/tls.cert --key=path/to/tls.key 
+
+sudo kubectl get secrets
+sudo kubectl get secrets secret-name -o yaml
